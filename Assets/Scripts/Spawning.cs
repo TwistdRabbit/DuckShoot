@@ -8,6 +8,8 @@ public class Spawning : MonoBehaviour
     public float maxSpawnTime = 7f;
     void Start()
     {
+        GameObject duckPrefab = duckPrefabs[Random.Range(0, duckPrefabs.Length)];
+        Instantiate(duckPrefab, transform.position, transform.rotation);
         StartCoroutine(SpawnDucks());
     }
 
