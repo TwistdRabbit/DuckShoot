@@ -8,6 +8,10 @@ public class Shooting : MonoBehaviour
     public float shootForce = 500f;
     public AudioSource audioSource;
     public AudioClip shootSound;
+
+    public float cooldownTime = 0.5f;
+    private float lastShotTime = 0f;
+
     void Start()
     {
         reticleTransform = GetComponent<RectTransform>();
@@ -19,9 +23,10 @@ public class Shooting : MonoBehaviour
         Vector2 mouseposition = Input.mousePosition;
         reticleTransform.position = mouseposition;
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Time.time >= lastShotTime + cooldownTime)
         {
             Shoot();
+            lastShotTime = Time.time;
         }
     }
 
